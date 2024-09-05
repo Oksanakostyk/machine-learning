@@ -28,22 +28,30 @@ def plot_graph(Productivity_Rate, color="red"):
     hours = [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24]
     fig = Figure(figsize=(5, 2), dpi=100)
     ax = fig.add_subplot(1, 1, 1)
-    ax.plot(hours, Productivity_Rate, color=color, marker='o')
+    ax.plot(hours, Productivity_Rate, color=color)
+
+    ax.fill_between(hours, Productivity_Rate, color=color, alpha=0.3)
+
     ax.set_title('Продуктивність роботи', fontsize=10)
     ax.set_xlabel('Години', fontsize=10)
     ax.set_ylabel('Продуктивність роботи', fontsize=10)
-    ax.grid(True)
+
+    ax.set_xticks(range(0, 25, 2))  # Поділки осі x через кожні 2 години
+    ax.set_yticks(range(0, max(Productivity_Rate) + 1, 1))
+
+    ax.grid(True, which='both', linestyle='--', linewidth=0.3)
+
     canvas = FigureCanvasTkAgg(fig, master=window)
     canvas.draw()
     canvas.get_tk_widget().place(x=210, y=550)
 
 def update_graph():
     productivity_rates = {
-        0: [9.8, 12, 8, 7.2, 6.9, 7, 6.5, 6.2, 5.5, 6.3, 6.0, 5.8, 5.4],
-        1: [6.5, 6.2, 5.5, 9.8, 12, 8, 7.2, 6.9, 7, 6.3, 6.0, 5.8, 5.4],
-        2: [6.5, 6.2, 7.5, 9.8, 10.3, 11.0, 12, 8, 7.2, 6.9, 7, 5.8, 5.4]
+        0: [2, 2, 2, 3, 4, 4.5, 3, 4, 8, 9, 8, 7, 2],
+        1: [1, 1, 8, 9, 7.5, 6, 5, 3, 2.5, 2, 1, 1, 1],
+        2: [2, 2, 3, 4, 6, 7, 5, 6, 9, 6, 4, 3, 2]
     }
-    color_map = {0: "red", 1: "green", 2: "blue"}
+    color_map = {0: "Gold", 1: "SkyBlue", 2: "blue"}
     selected_value = var.get()
     plot_graph(productivity_rates.get(selected_value, []), color=color_map.get(selected_value, "red"))
 
