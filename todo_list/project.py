@@ -26,15 +26,15 @@ def setup_database():
 def plot_graph(Productivity_Rate, color="red"):
     global window
     hours = [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24]
-    fig = Figure(figsize=(5, 2), dpi=100)
+    fig = Figure(figsize=(5, 2.5), dpi=100)
     ax = fig.add_subplot(1, 1, 1)
     ax.plot(hours, Productivity_Rate, color=color)
 
     ax.fill_between(hours, Productivity_Rate, color=color, alpha=0.3)
 
-    ax.set_title('Продуктивність роботи', fontsize=10)
-    ax.set_xlabel('Години', fontsize=10)
-    ax.set_ylabel('Продуктивність роботи', fontsize=10)
+
+    ax.set_xlabel('Години', fontsize=8)
+    ax.set_ylabel('Продуктивність', fontsize=10)
 
     ax.set_xticks(range(0, 25, 2))  # Поділки осі x через кожні 2 години
     ax.set_yticks(range(0, max(Productivity_Rate) + 1, 1))
